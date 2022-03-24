@@ -1,0 +1,69 @@
+/* COMMON */
+.inner { 
+  width: 1100px;
+  margin: 0 auto;  /* 가운데정렬 -> width랑 margin 0 auto 로 설정 */
+  position: relative;  /* 부모요소에 relative를 설정 -> 자식요소에 영향 */
+}
+a {
+  text-decoration: none;
+}
+
+/* HEADER */
+header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  background-color: #fcfcfc;
+  border-bottom: 1px solid #c8c8c8;
+  z-index: 9;
+  /* display: none; */
+}
+header > .inner {
+  height: 90px;
+}
+header .home {
+  height: 30px;
+  position: absolute;
+  top: 25px;
+  left: 0;
+  bottom: 0;
+  margin: 0 auto;
+  padding: 5px;
+  /* background-color: yellow; */
+}
+header .main-menu {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  display: flex;
+}
+header .main-menu ul.menu {
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  list-style: none;
+}
+header .main-menu ul.menu li {
+  position: relative;
+}
+header .main-menu ul.menu li::before {
+  content: "";
+  width: 1px;
+  height: 12px;
+  background-color: royalblue;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+header .main-menu ul.menu li:first-child:before {
+  display: none;
+}
+header .main-menu ul.menu li a {
+  font-size: 16px;
+  padding: 11px 16px;
+  display: block;
+  color: royalblue;
+}
+header .main-menu ul.menu li a:hover {
+  color: blue;
+}
