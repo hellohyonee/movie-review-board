@@ -4,6 +4,9 @@ import { FiArrowUp } from "react-icons/fi";
 import { MovieReview } from './MovieReview';
 
 export const Main = () => {
+  const scrollTop = () => {
+    window.scrollTo(0, 0)
+  }
 
   return (
     <>
@@ -17,7 +20,7 @@ export const Main = () => {
         </div>
       </section>
 
-      <div id='to-top'>
+      <div id='to-top' onClick={scrollTop}>
         <FiArrowUp size='20' />
       </div>
     </>

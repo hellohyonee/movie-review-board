@@ -1,3 +1,72 @@
-h1 {
-  top: 200px;
+/* Button */
+.btn {
+  width: 130px;
+  padding: 10px;
+  background-color: aliceblue;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  color: royalblue;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+  box-sizing: border-box;
+  display: block;
+  transition: .3s;
+}
+.btn:hover {
+  background-color: #bbdefb;
+  color: royalblue;
+}
+.btn.btn--reverse {
+  background-color: #fff;
+}
+.btn.btn--reverse:hover {
+  background-color: #fff;
+  color: grey;
+  border-color: grey;
+}
+
+/* REVIEW FORM */
+.form {
+  margin-top: 90px;
+}
+.form .inner {
+  height: 800px;
+  /* background-color: pink; */
+}
+.form h1 {
+  text-align: center;
+  margin-top: 100px;
+}
+.form .write {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.form .write .title-input {
+  position: absolute;
+  width: 700px;
+  height: 40px;
+  margin: 0;
+  font-size: 20px;
+  border: 1px solid #e0e0e0;
+  outline: none;
+}
+.form .write .editor {
+  position: absolute;
+  margin-top: 70px;
+}
+.form .btn-group {
+  position: absolute;
+  bottom: 30px;
+  right: 90px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.form .btn-group .btn.save {
+  margin-right: 10px;
+}
+.form .btn-group .btn.cancel {
+
 }
