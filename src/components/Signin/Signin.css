@@ -1,0 +1,65 @@
+.signin-form {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: relative;
+  
+}
+.signin-form h1 {
+  font-size: 32px;
+  color: royalblue;
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 60px;
+}
+.input-area {
+  width: 400px;
+  position: relative;
+  margin-top: 20px;
+}
+.input-area:first-child {
+  margin-top: 0;
+}
+.input-area input {
+  width: 100%;
+  padding: 20px 10px 10px;
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 18px;
+  color: royalblue;
+  outline: none;
+}
+.input-area label {
+  position: absolute;
+  left: 10px;
+  top: 20px;
+  font-size: 18px;
+  color: #999;
+  transition: top .4s ease;
+}
+.input-area label.warning {
+  color: red !important;
+  animation: warning .3s ease;
+  animation-iteration-count: 3;
+}
+.input-area input:focus + label ,
+.input-area input:valid + label {
+  top: 0;
+  font-size: 14px;
+}
+.btn-area {
+  margin-top: 30px;
+}
+.btn-area button {
+  width: 100%;
+  height: 50px;
+  background-color: royalblue;
+  color: #fff;
+  font-size: 20px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+}

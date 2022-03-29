@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap');
 .App {
   text-align: center;
+  font-family: 'Nanum Gothic', sans-serif;
 }
 
 /* COMMON */
@@ -13,4 +15,7 @@ img {
 }
 a {
   text-decoration: none;
+}
+input {
+  box-sizing: border-box;
 }
