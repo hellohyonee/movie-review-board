@@ -1,9 +1,19 @@
-import React from 'react';
-import '@toast-ui/editor/dist/toastui-editor.css';
-import { Editor } from '@toast-ui/react-editor';
+import React, { useState } from 'react';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import './Review.css'
 
 export const Review = () => {
+  const [reviewContent, setReviewContent] = useState({ title: '', content: '' });
+
+  const getValue = (e) => {
+    const { name, value } = e.target;
+    setReviewContent({
+      ...reviewContent,
+      [name]: value
+    })
+    console.log(reviewContent);
+  }
 
   return (
     <>
@@ -12,14 +22,30 @@ export const Review = () => {
             <h1>Movie Review</h1>
             <div className='write'>
 
-              <input className='title-input' type='text' placeholder='Title' />
+              <input 
+                className='title-input' 
+                type='text'
+                placeholder='Title'
+                onChange={getValue}
+                name='title'
+                />
               <div className='editor'>
-                <Editor
-                  initialValue="Write Now!"
-                  previewStyle="vertical"
-                  height="500px"
-                  initialEditType="markdown"
-                  useCommandShortcut={true}
+
+                <CKEditor 
+                  editor={ ClassicEditor }
+                  data="<p>Write Now!</p>"
+                  onReady={ editor => {
+                      console.log( 'Editor is ready to use!', editor );
+                  } }
+                  onChange={ ( event, editor ) => {
+                      const data = editor.getData();
+                      console.log( { event, editor, data } );
+                      setReviewContent({
+                        ...reviewContent,
+                        content: data
+                      })
+                      console.log(reviewContent)
+                  } }
                 />
               </div>
 

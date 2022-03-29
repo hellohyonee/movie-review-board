@@ -46,7 +46,7 @@
 }
 .form .write .title-input {
   position: absolute;
-  width: 700px;
+  width: 630px;
   height: 40px;
   margin: 0;
   font-size: 20px;
@@ -69,4 +69,7 @@
 }
 .form .btn-group .btn.cancel {
 
+}
+.ck.ck-editor__editable:not(.ck-editor__nested-editable) {
+  min-height: 500px;
 }
