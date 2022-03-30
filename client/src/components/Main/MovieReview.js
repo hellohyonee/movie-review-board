@@ -1,8 +1,14 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
+import ReactHtmlParser from 'html-react-parser';
 import './MovieReview.css'
 import { FiX } from "react-icons/fi";
 
 export const MovieReview = () => {
+  const location = useLocation();
+  const viewContent = location.state;
+  console.log(viewContent);
+
 
   return (
     <section className='card'>
@@ -16,9 +22,7 @@ export const MovieReview = () => {
           <p className='year'>Year: 2021</p>
           <p className='genre'>Genre: Action, Adventure, Fantasy</p>
           <p className='review'>
-          앤드게임이 10년 마블 케릭터 대장정의 마침표였다면,<br />
-          이건 20년 스파이더맨 시리즈의 완벽한 마침표.
-          </p>
+          {ReactHtmlParser(viewContent.content)}</p>
         </div>
         <div className='delete'>
           <FiX color='grey' size='25' />

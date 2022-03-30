@@ -4,6 +4,8 @@ import { FiArrowUp } from "react-icons/fi";
 import { MovieReview } from './MovieReview';
 
 export const Main = () => {
+  
+
   const scrollTop = () => {
     window.scrollTo(0, 0)
   }

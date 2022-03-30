@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import './Review.css'
 
 export const Review = () => {
   const [reviewContent, setReviewContent] = useState({ title: '', content: '' });
-
+  const navigate = useNavigate();
+  
+  // input value 받는 함수 (컨텐츠가 변하는 것을 받는 함수)
   const getValue = (e) => {
     const { name, value } = e.target;
     setReviewContent({
@@ -14,6 +17,16 @@ export const Review = () => {
     })
     console.log(reviewContent);
   }
+  
+  // 저장해서  main 페이지('/')로 보내는 함수
+  const saveHandler = () => {
+    console.log('click')
+    navigate(
+      '/',
+      { state: {...reviewContent} }
+    )
+  }
+
 
   return (
     <>
@@ -34,9 +47,7 @@ export const Review = () => {
                 <CKEditor 
                   editor={ ClassicEditor }
                   data="<p>Write Now!</p>"
-                  onReady={ editor => {
-                      console.log( 'Editor is ready to use!', editor );
-                  } }
+                  
                   onChange={ ( event, editor ) => {
                       const data = editor.getData();
                       console.log( { event, editor, data } );
@@ -44,14 +55,13 @@ export const Review = () => {
                         ...reviewContent,
                         content: data
                       })
-                      console.log(reviewContent)
                   } }
                 />
               </div>
 
             </div>
             <div className='btn-group'>
-              <div className='btn save'>저장</div>
+              <div className='btn save' onClick={saveHandler}>저장</div>
               <div className='btn btn--reverse cancel'>취소</div>
             </div>
         </div>
