@@ -8,6 +8,17 @@ export const MovieReview = () => {
   const location = useLocation();
   const viewContent = location.state;
 
+  const contentViewer = (viewContent) => {
+    if (viewContent === null || viewContent.content === undefined) {
+      return null;
+    }
+    
+    return (
+      <div>
+        { ReactHtmlParser(viewContent.content) }
+      </div>
+    )
+  }
 
   return (
     <section className='card'>
@@ -20,9 +31,9 @@ export const MovieReview = () => {
           <h2 className='title'>Spider-Man: No Way Home</h2>
           <p className='year'>Year: 2021</p>
           <p className='genre'>Genre: Action, Adventure, Fantasy</p>
-          <div>
-          {ReactHtmlParser(viewContent.content)}
-          </div>
+          {
+            contentViewer(viewContent)
+          }
         </div>
         <div className='delete'>
           <FiX color='grey' size='25' />
