@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import './Signin.css'
 
 export const Signin = () => {
-  const idEl = document.querySelector('#id');
-  const pwEl = document.querySelector('#pw');
+  // const idEl = document.querySelector('#id');
+  // const pwEl = document.querySelector('#pw');
   // const btnEl = document.querySelector('#btn');
-  const labelEl = document.querySelector('label');
+  // const labelEl = document.querySelector('label');
 
   // const warningHandler = (e) => {
   //   console.log('click');
