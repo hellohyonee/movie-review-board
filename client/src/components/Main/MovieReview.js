@@ -24,7 +24,7 @@ export const MovieReview = () => {
     <section className='card'>
       <div className='card-line'>
 
-        <div className='image'>
+        <div className='poster'>
           <img src='' alt='' width='187' height='269' />
         </div>
         <div className='info'>

@@ -26,12 +26,12 @@ export const Review = () => {
     // 2-1 데이터 조회했으나 영화를 찾지못하면 다시 입력하도록 유도
     // 3. reviewContent 에 저장
 
-    if (inputTitle === '') {
+    if (inputTitle === '' || inputTitle === undefined) {
       alert('영화 제목을 써주세요!')
       setInputTitle(titleInput.current.focus())
     }
 
-    const movieData = await axios
+    await axios
       .get(`http://www.omdbapi.com/?apikey=4cd53ad6&t=${inputTitle}`,
         {
           headers: { 'Content-Type': 'application/json' }
@@ -42,19 +42,23 @@ export const Review = () => {
           alert(`${res.data.Error}\n영화 제목을 다시 검색해주세요!`)
           setInputTitle(titleInput.current.focus())
         }
-        return res.data;
+        // res.data의 내용을 상태로 저장하기
+        setMovieInfo({
+          title: res.data.Title,
+          year: res.data.Year,
+          genre: res.data.Genre,
+          runtime: res.data.Runtime,
+          poster: res.data.Poster
+        })
       })
       .catch(e => console.log(e))
-      
-    console.log('영화정보: ',movieData)
+  };
 
-    
-  }
-  
+  console.log('상태 저장된 정보: ',movieInfo)
   // 저장해서  main 페이지('/')로 보내는 함수 // DB로 데이터 보내고 페이지 이동!!!
   // 데이터에 테이블을 생성
   const saveHandler = () => {
-    // 
+    
 
     // navigate(
     //   '/'
