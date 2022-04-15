@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
@@ -9,6 +9,14 @@ export const Review = () => {
   const [reviewContent, setReviewContent] = useState({ title: '', content: '' });
   const navigate = useNavigate();
   const [inputTitle, setInputTitle] = useState('');
+  const titleInput = useRef();
+  const [movieInfo, setMovieInfo] = useState({
+    title: '',
+    year: '',
+    genre: '',
+    runtime: '',
+    poster: ''
+  })
   
   // title을 api에 조회하는 함수 (타이틀 작성 후, 에디터에 focus on이 될 경우 데이터 조회)
   const searchMovie = async () => {
@@ -17,13 +25,34 @@ export const Review = () => {
     // 2. 데이터 조회
     // 2-1 데이터 조회했으나 영화를 찾지못하면 다시 입력하도록 유도
     // 3. reviewContent 에 저장
-    const data = await axios
-      .get(`http://www.omdbapi.com/?apikey=4cd53ad6&t=${inputTitle}`)
-      .then(res => res.data)
-    console.log(data);
+
+    if (inputTitle === '') {
+      alert('영화 제목을 써주세요!')
+      setInputTitle(titleInput.current.focus())
+    }
+
+    const movieData = await axios
+      .get(`http://www.omdbapi.com/?apikey=4cd53ad6&t=${inputTitle}`,
+        {
+          headers: { 'Content-Type': 'application/json' }
+        })
+      .then((res) => {
+        // console.log(res.data)
+        if (res.data.Response === 'False') {
+          alert(`${res.data.Error}\n영화 제목을 다시 검색해주세요!`)
+          setInputTitle(titleInput.current.focus())
+        }
+        return res.data;
+      })
+      .catch(e => console.log(e))
+      
+    console.log('영화정보: ',movieData)
+
+    
   }
   
   // 저장해서  main 페이지('/')로 보내는 함수 // DB로 데이터 보내고 페이지 이동!!!
+  // 데이터에 테이블을 생성
   const saveHandler = () => {
     // 
 
@@ -44,9 +73,10 @@ export const Review = () => {
               <input 
                 className='title-input' 
                 type='text'
-                placeholder='Title'
+                placeholder='Title: Please Search the title in English!'
                 onChange={e => setInputTitle(e.target.value)}
                 name='title'
+                ref={titleInput}
                 />
               <div className='editor'>
 
