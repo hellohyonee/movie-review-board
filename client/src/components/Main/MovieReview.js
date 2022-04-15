@@ -31,6 +31,7 @@ export const MovieReview = () => {
           <h2 className='title'>Spider-Man: No Way Home</h2>
           <p className='year'>Year: 2021</p>
           <p className='genre'>Genre: Action, Adventure, Fantasy</p>
+          <p className='runtime'>Runtime: 148 min</p>
           {
             contentViewer(viewContent)
           }
