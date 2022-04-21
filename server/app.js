@@ -1,8 +1,13 @@
 const express = require('express');
-const app = express();
 const cors = require('cors');
-const port = 3000;
+const morgan = require('morgan');
+const app = express();
+const router = require('./router/index');
+const port = process.env.port || 8000;
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }))
+app.use(morgan('dev'));
 app.use(
   cors({
     origin: 'http://localhost:3000',
