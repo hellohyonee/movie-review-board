@@ -3,7 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import './Review.css'
+import './Review.css';
+
+axios.defaults.withCredentials = true;
 
 export const Review = () => {
   const [reviewContent, setReviewContent] = useState({ title: '', content: '' });
@@ -17,14 +19,13 @@ export const Review = () => {
     runtime: '',
     poster: ''
   })
-  
+
   // title을 api에 조회하는 함수 (타이틀 작성 후, 에디터에 focus on이 될 경우 데이터 조회)
   const searchMovie = async () => {
     // 1. inputTitle 에 value 가 들어있는지 확인
     // 1-1 value가 없으면 => 입력하도록 유도
     // 2. 데이터 조회
     // 2-1 데이터 조회했으나 영화를 찾지못하면 다시 입력하도록 유도
-    // 3. reviewContent 에 저장
 
     if (inputTitle === '' || inputTitle === undefined) {
       alert('영화 제목을 써주세요!')
@@ -55,10 +56,20 @@ export const Review = () => {
   };
 
   console.log('상태 저장된 정보: ',movieInfo)
-  // 저장해서  main 페이지('/')로 보내는 함수 // DB로 데이터 보내고 페이지 이동!!!
+
+  
+
+  // 3. reviewContent 에 title, content 저장, movieInfo 저장 -> DB에 저장하기!
+  // DB에 데이터 저장하고 main 페이지('/')로 보내는 함수
   // 데이터에 테이블을 생성
-  const saveHandler = () => {
+  const saveHandler = async () => {
     
+    await axios
+      .post('', 
+      {
+        headers: { 'Content-Type': 'application/json' }
+      })
+      .then((res) => res.data)
 
     // navigate(
     //   '/'

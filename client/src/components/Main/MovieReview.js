@@ -8,6 +8,10 @@ export const MovieReview = () => {
   const location = useLocation();
   const viewContent = location.state;
 
+  // 1. DB에 저장된 review 정보를 조회하는 함수
+
+  // 2. review content(내용) 불러오는 함수 (useNavigate를 사용하여 useLocation으로 value를 가져옴)
+  // -> DB에서 데이터를 가져오는데 이게 필요할까?
   const contentViewer = (viewContent) => {
     if (viewContent === null || viewContent.content === undefined) {
       return null;
@@ -18,7 +22,9 @@ export const MovieReview = () => {
         { ReactHtmlParser(viewContent.content) }
       </div>
     )
-  }
+  };
+
+  
 
   return (
     <section className='card'>
