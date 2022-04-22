@@ -34,6 +34,7 @@ export const Main = () => {
           <MovieReview />
           <MovieReview />
 
+          {reviewList.length === 0 ? '리뷰가 없습니다' : reviewList}
         </div>
       </section>
 

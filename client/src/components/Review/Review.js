@@ -5,7 +5,7 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import './Review.css';
 
-axios.defaults.withCredentials = true;
+axios.defaults.withCredentials = false;
 
 export const Review = () => {
   const [reviewContent, setReviewContent] = useState({ title: '', content: '' });
@@ -35,7 +35,7 @@ export const Review = () => {
     await axios
       .get(`http://www.omdbapi.com/?apikey=4cd53ad6&t=${inputTitle}`,
         {
-          headers: { 'Content-Type': 'application/json' }
+          headers: { 'Content-Type': 'application/json' },
         })
       .then((res) => {
         // console.log(res.data)
@@ -65,11 +65,25 @@ export const Review = () => {
   const saveHandler = async () => {
     
     await axios
-      .post('', 
-      {
-        headers: { 'Content-Type': 'application/json' }
-      })
-      .then((res) => res.data)
+      .post('http://localhost:8000/review', 
+        {
+          headers: { 'Content-Type': 'application/json' }
+        },
+        { 
+          reviewData :  {
+            title: reviewContent.title,
+            content: reviewContent.content,
+          },
+          movieInfo : {
+            title: movieInfo.title,
+            year: movieInfo.year,
+            genre: movieInfo.genre,
+            runtime: movieInfo.runtime,
+            poster: movieInfo.poster
+          }
+        }
+      )
+      .then(() => alert('리뷰가 저장되었습니다!'))
 
     // navigate(
     //   '/'
