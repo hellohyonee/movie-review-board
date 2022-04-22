@@ -5,7 +5,7 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import './Review.css';
 
-axios.defaults.withCredentials = false;
+axios.defaults.withCredentials = true;
 
 export const Review = () => {
   const [reviewContent, setReviewContent] = useState({ title: '', content: '' });
@@ -36,6 +36,7 @@ export const Review = () => {
       .get(`http://www.omdbapi.com/?apikey=4cd53ad6&t=${inputTitle}`,
         {
           headers: { 'Content-Type': 'application/json' },
+          withCredentials: false
         })
       .then((res) => {
         // console.log(res.data)
@@ -60,37 +61,40 @@ export const Review = () => {
   
 
   // 3. reviewContent 에 title, content 저장, movieInfo 저장 -> DB에 저장하기!
+    //? reviewContent의 title이 필요할까?
   // DB에 데이터 저장하고 main 페이지('/')로 보내는 함수
-  // 데이터에 테이블을 생성
   const saveHandler = async () => {
-    
+    const reviewContents = {
+      reviewData :  {
+        title: reviewContent.title,
+        content: reviewContent.content,
+      },
+      movieInfo : {
+        title: movieInfo.title,
+        year: movieInfo.year,
+        genre: movieInfo.genre,
+        runtime: movieInfo.runtime,
+        poster: movieInfo.poster
+      }
+    };
+
+    if (reviewContent.content === '') {
+      return alert('영화 제목이 없거나 내용이 없습니다!')
+    }
+
     await axios
-      .post('http://localhost:8000/review', 
+      .post('http://localhost:8000/review/3', 
         {
-          headers: { 'Content-Type': 'application/json' }
-        },
-        { 
-          reviewData :  {
-            title: reviewContent.title,
-            content: reviewContent.content,
-          },
-          movieInfo : {
-            title: movieInfo.title,
-            year: movieInfo.year,
-            genre: movieInfo.genre,
-            runtime: movieInfo.runtime,
-            poster: movieInfo.poster
-          }
-        }
-      )
-      .then(() => alert('리뷰가 저장되었습니다!'))
-
-    // navigate(
-    //   '/'
-    //   // { state: {...reviewContent} }  // -> DB로 가면 삭제
-    // )
+          headers: { 'Content-Type': 'application/json' },
+          data: reviewContents 
+        })
+      .then((data) => {
+        console.log(data)
+        alert('리뷰 저장!');
+        navigate('/');
+      })
+      .catch ((err) => console.log(err))
   }
-
 
   return (
     <>
@@ -111,7 +115,7 @@ export const Review = () => {
 
                 <CKEditor 
                   editor={ ClassicEditor }
-                  data="<p>Write Now!</p>"
+                  data=''
                   
                   onChange={ ( event, editor ) => {
                       const data = editor.getData();
