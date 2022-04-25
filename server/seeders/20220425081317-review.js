@@ -2,9 +2,9 @@
 
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.bulkInsert('Reviews', [
+    await queryInterface.bulkInsert('Review', [
       {
-        user_id: '1',
+        userId: '1',
         title: 'Frozen',
         year: '2013',
         genre: 'Animation, Adventure, Comedy',
@@ -14,11 +14,10 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       }
-    ], {});
+    ])
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('Reviews', null, {});
-    
+    await queryInterface.bulkDelete('Review', null, {});
   }
 };

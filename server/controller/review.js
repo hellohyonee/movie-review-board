@@ -32,7 +32,7 @@ module.exports = {
   },
   post: async (req, res) => {
     try {
-      const id = req.params.user_id;
+      const id = req.params.userId;
       const movieInfo = req.body.data.movieInfo;
       const reviewContent = req.body.data.reviewData;
 
@@ -40,7 +40,7 @@ module.exports = {
       console.log('리뷰내용: ', reviewContent);
       
       const createReview = await ReviewModel.create({
-        user_id: id,
+        userId: id,
         title: movieInfo.title,
         year: movieInfo.year,
         genre: movieInfo.genre,
@@ -48,9 +48,9 @@ module.exports = {
         poster: movieInfo.poster,
         content: reviewContent.content
       });
-      // if (createReview.title === '' || createReview.content === '') {
-      //   res.status(400).json({ message: '리뷰 제목이 없거나 내용이 없습니다.' })
-      // }
+      if (createReview.title === '' || createReview.content === '') {
+        res.status(400).json({ message: '리뷰 제목이 없거나 내용이 없습니다.' })
+      }
       res.status(200).json({ message: 'success', reviewData: createReview });
     } catch (err) {
       console.log(err)
