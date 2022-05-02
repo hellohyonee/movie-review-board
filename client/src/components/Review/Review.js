@@ -78,23 +78,22 @@ export const Review = () => {
       }
     };
 
-    if (reviewContent.content === '') {
+    if (reviewContent.content === '' || reviewContent.content === null) {
       return alert('영화 제목이 없거나 내용이 없습니다!')
     }
 
-    await axios
-      .post('http://localhost:8000/review/3', 
+    const response = await axios
+      .post(`http://localhost:8000/review/2`, // ${userId}  
         {
           headers: { 'Content-Type': 'application/json' },
           data: reviewContents 
         })
-      .then((data) => {
-        console.log(data)
+      
+        console.log(response);
+
         alert('리뷰 저장!');
         navigate('/');
-      })
-      .catch ((err) => console.log(err))
-  }
+  };
 
   return (
     <>
